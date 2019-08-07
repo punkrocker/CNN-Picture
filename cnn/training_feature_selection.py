@@ -4,8 +4,8 @@ from keras import models
 from keras import optimizers
 from keras.preprocessing.image import ImageDataGenerator
 
-import base
-from base import batch_size
+from cnn import base
+from cnn.base import batch_size
 
 datagen = ImageDataGenerator(rescale=1. / 255)
 
