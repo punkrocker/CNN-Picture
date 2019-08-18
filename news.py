@@ -1,5 +1,5 @@
 import numpy as np
-from keras import models, layers
+from keras import models, layers, callbacks
 from keras.datasets import reuters
 
 import cnn.base
@@ -41,11 +41,19 @@ partial_x_train = x_train[1000:]
 y_val = one_hot_train_labels[:1000]
 partial_y_train = one_hot_train_labels[1000:]
 
+callback = [
+    callbacks.TensorBoard(
+        log_dir='my_log_dir',
+        histogram_freq=1,
+        embeddings_freq=1
+    )
+]
 history = model.fit(partial_x_train,
                     partial_y_train,
                     batch_size=512,
                     epochs=9,
-                    validation_data=(x_val, y_val))
+                    validation_data=(x_val, y_val),
+                    callbacks=callbacks)
 
 cnn.base.draw_result(history)
 
@@ -54,5 +62,3 @@ print(result)
 
 predict = model.predict(x_test)
 print(predict[0])
-
-
