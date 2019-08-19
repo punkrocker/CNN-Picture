@@ -1,7 +1,5 @@
 import numpy as np
-from keras import layers
-from keras import models
-from keras import optimizers
+from keras import layers, models, optimizers, callbacks
 from keras.preprocessing.image import ImageDataGenerator
 
 from cnn import base
@@ -47,10 +45,20 @@ model.compile(optimizer=optimizers.RMSprop(lr=2e-5),
               loss='binary_crossentropy',
               metrics=['acc'])
 
+callback = [
+    callbacks.TensorBoard(
+        log_dir='log',
+        histogram_freq=1,
+    )
+]
+
 history = model.fit(train_features,
                     train_labels,
                     epochs=30,
-                    batch_size=base.batch_size,
-                    validation_data=(validation_features, validation_labels))
+                    batch_size=200,
+                    # steps_per_epoch=20,
+                    validation_data=(validation_features, validation_labels),
+                    # validation_steps=10,
+                    callbacks=callback)
 
 base.draw_result(history)
