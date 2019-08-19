@@ -30,7 +30,7 @@ def extract_features(directory, sample_count):
 
 train_features, train_labels = extract_features(base.train_dir, 2000)
 validation_features, validation_labels = extract_features(base.validation_dir, 1000)
-test_features, test_labels = extract_features(base.test_dir, 1000)
+test_features,test_labels = extract_features(base.test_dir, 1000)
 
 train_features = np.reshape(train_features, (2000, 1 * 1 * 512))
 validation_features = np.reshape(validation_features, (1000, 1 * 1 * 512))
