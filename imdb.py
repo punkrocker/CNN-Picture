@@ -26,7 +26,9 @@ y_test = np.asarray(test_labels).astype('float32')
 
 model = models.Sequential()
 model.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
+model.add(layers.Dropout(0.5))
 model.add(layers.Dense(16, activation='relu'))
+model.add(layers.Dropout(0.5))
 model.add(layers.Dense(1, activation='sigmoid'))
 model.compile(optimizer=optimizers.RMSprop(lr=0.001),
               loss='binary_crossentropy',
