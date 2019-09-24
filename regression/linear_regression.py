@@ -29,17 +29,19 @@ def stand_regres(x_arr, y_arr):
 
 x, y = load_data('ex0.txt')
 result = stand_regres(x, y)
+x = np.mat(x)
+y = np.mat(y)
 y_hat = x * result
 
 import matplotlib.pyplot as plt
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
-x = np.mat(x)
-y = np.mat(y)
 ax.scatter(x[:, 1].flatten().A[0], y.T[:, 0].flatten().A[0])
 x_copy = x.copy()
 x_copy.sort(0)
 y_hat = x_copy * result
 ax.plot(x_copy[:, 1], y_hat)
 plt.show()
+y_hat = x * result
+print(np.corrcoef(y_hat.T, y))
