@@ -14,7 +14,7 @@ def build_model():
     return model
 
 
-k = 1
+k = 4
 num_val_samples = len(train_data) // k
 num_epoch = 5
 all_score = []
@@ -44,10 +44,14 @@ for i in range(k):
     model = build_model()
     history = model.fit(partial_train_data, partial_train_targets,
                         epochs=num_epoch, batch_size=1, verbose=1)
-    val_mse, val_mae = model.evaluate(val_data, val_targets, verbose=1)
-    all_score.append(val_mae)
+    # val_mse, val_mae = model.evaluate(val_data, val_targets, verbose=1)
+    # all_score.append(val_mae)
+    val_targets_predict = model.predict(val_data)
+    for x in range(len(val_targets_predict)):
+        print(val_targets_predict[x], val_targets[x])
     mae_history = history.history['mean_absolute_error']
     all_mae_history.append(mae_history)
+
 
 print('mae mean = ', np.mean(all_score))
 aver = [np.mean([x[i] for x in all_mae_history]) for i in range(num_epoch)]
