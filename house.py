@@ -14,9 +14,9 @@ def build_model():
     return model
 
 
-k = 4
+k = 1
 num_val_samples = len(train_data) // k
-num_epoch = 500
+num_epoch = 5
 all_score = []
 all_mae_history = []
 
